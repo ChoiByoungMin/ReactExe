@@ -8,7 +8,10 @@ import "./App.css";
 // import SubApp from "./ex06_nav_list/SubApp";
 // import SubApp from "./ex07_nav_list/SubApp";
 // import SubApp from "./ex08_nav_list/SubApp";
-import SubApp from "./ex09_list_key/SubApp";
+// import SubApp from "./ex09_list_key/SubApp";
+// import SubApp from "./ex10_event/SubApp";
+// import SubApp from "./ex11_event_arrow/SubApp";
+import SubApp from "./ex12_nav_event/SubApp";
 
 function App() {
   return <SubApp />;
