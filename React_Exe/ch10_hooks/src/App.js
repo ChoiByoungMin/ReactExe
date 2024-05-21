@@ -13,7 +13,11 @@ import "./App.css";
 // import Info from "./ex10_useReducer/Info";
 // import Average from "./ex11_useMemo/Average";
 // import Average from "./ex12_useMemo/Average";
-import Average from "./ex13_useCallback/Average";
+// import Average from "./ex13_useCallback/Average";
+// import Average from "./ex14_useRef/Average";
+// import Info from "./ex16_useCustomHook/Info";
+// import Spec from "./ex16_useCustomHook/Spec";
+import ClassRoom from "./ex17_useCustomHook/ClassRoom";
 
 function App() {
   // return <Counter />;
@@ -21,7 +25,16 @@ function App() {
   // return <ParentInfo />;
   // return <Counter />;
   // return <Info />;
-  return <Average />;
+  // return <Average />;
+  // return (
+  //   <div>
+  //     <Info />
+  //     <hr />
+  //     <Spec />
+  //   </div>
+  // );
+
+  return <ClassRoom />;
 }
 
 export default App;
