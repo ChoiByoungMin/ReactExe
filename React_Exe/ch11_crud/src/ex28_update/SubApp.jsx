@@ -71,6 +71,29 @@ function Create(props){
   );
 }
 
+// <Update/>는 <Create/>와 UI나 이벤트 동작이 동일하므로, 일부 명칭만 변경
+function Update(props){
+  
+  return (
+    <article>
+      {/* Create -> Update로 수정 */}
+      <h2>Update</h2>
+      <form onSubmit={event=>{
+        event.preventDefault();
+        const title = event.target.title.value;
+        const body = event.target.body.value;
+        // onCreate -> onUpdate 로 수정
+        props.onUpdate(title, body);
+      }}>
+        <p><input type='text' name='title' placeholder='title'/></p>
+        <p><textarea name='body' placeholder='body'></textarea></p>
+        {/* Create -> Update로 수정 */}
+        <p><input type='submit' value="Update"/></p>
+      </form>
+    </article>
+  );
+}
+
 export default function SubApp(){
 
   const [mode, setMode] = useState('WELCOME');
@@ -102,7 +125,11 @@ export default function SubApp(){
     }
 
     content = <Article title={title} body={body}></Article>
-    contextControl = <li><a href={'/update/' + id}>Update</a></li>
+    contextControl = <li><a href={'/update/' + id} onClick={event=>{
+      event.preventDefault();
+      // UPDATE 모드로 전환
+      setMode('UPDATE');
+    }}>Update</a></li>
 
   }else if(mode === 'CREATE'){
 
@@ -115,6 +142,10 @@ export default function SubApp(){
       setMode('READ');
       setId(nextId);
       setNextId(nextId+1);
+    }} />
+  }else if(mode === 'UPDATE'){
+    content = <Update onUpdate={(title, body)=>{
+      
     }} />
   }
 

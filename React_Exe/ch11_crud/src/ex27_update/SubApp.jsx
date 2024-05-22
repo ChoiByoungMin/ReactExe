@@ -102,7 +102,11 @@ export default function SubApp(){
     }
 
     content = <Article title={title} body={body}></Article>
-    contextControl = <li><a href={'/update/' + id}>Update</a></li>
+    contextControl = <li><a href={'/update/' + id} onClick={event=>{
+      event.preventDefault();
+      // UPDATE 모드로 전환
+      setMode('UPDATE');
+    }}>Update</a></li>
 
   }else if(mode === 'CREATE'){
 
@@ -116,6 +120,8 @@ export default function SubApp(){
       setId(nextId);
       setNextId(nextId+1);
     }} />
+  }else if(mode === 'UPDATE'){
+    alert('UPDATE 모드 전환');
   }
 
     return (
