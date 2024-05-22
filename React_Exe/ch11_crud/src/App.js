@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import SubApp from "./ex31_update/SubApp";
+import SubApp from "./ex35_divide_file/SubApp";
 
 function App() {
   return <SubApp />;
