@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import ReactButton from "./ex01_non_styled/ReactButton";
+import StyledButton from "./ex02_styled/StyledButton";
+// import SimpleButton from "./ex03_styled/SimpleButton";
+import SimpleButton from "./ex04_styled/SimpleButton";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ReactButton>안녕하세요</ReactButton>
+      <StyledButton>감사합니다</StyledButton>
+      <SimpleButton>행복합니다</SimpleButton>
+    </>
   );
 }
 
