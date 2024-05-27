@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState, useRef, useCallback } from "react";
-import TodoTemplate from "./ex05_TodoInsert/TodoTemplate";
-import TodoInsert from "./ex05_TodoInsert/TodoInsert";
-import TodoList from "./ex05_TodoInsert/TodoList";
+import TodoTemplate from "./ex07_toggle/TodoTemplate";
+import TodoInsert from "./ex07_toggle/TodoInsert";
+import TodoList from "./ex07_toggle/TodoList";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -38,10 +38,29 @@ function App() {
     [todos]
   );
 
+  const onRemove = useCallback(
+    (id) => {
+      // id에 해당하지 않는 항목만, 재저장
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos]
+  );
+
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo
+        )
+      );
+    },
+    [todos]
+  );
+
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
     </TodoTemplate>
   );
 }
