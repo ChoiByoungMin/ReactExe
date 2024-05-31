@@ -26,5 +26,6 @@ public class Car {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ownerid")
     private Owner owner;
 }
