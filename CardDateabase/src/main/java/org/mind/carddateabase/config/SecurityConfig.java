@@ -5,13 +5,16 @@ import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 //spring security설정을 하게 되면
 //직접 서버의 주소로 법근하려고하면 무조건 login화면으로 이동한다.
@@ -46,14 +49,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // 인증 검사하는 객체를 Bean으로 생성
-//    @Bean
-//    public AuthenticationManager authenticationManager() throws Exception {
-//        return authenticationManager();
-//    }
+    @Bean
+    public AuthenticationManager getAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
 
     // 보안설정/주소 권한 허용 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        // csrf보안은 세션을 활용하는데 Rest서버는 세션을 사용하지 않으므로 disable
+        http.csrf().disable()
+                .sessionManagement()
+                // Rest 서버는 세션 상태를 유지하지 않으므로 STATELESS
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                // /login엔드포인트에 대한 POST요청은 접근을 허용함.
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                // 다른 요청은 인증 과정을 거쳐야 접근할 수 있다.
+                .anyRequest().authenticated();
     }
+
 }
