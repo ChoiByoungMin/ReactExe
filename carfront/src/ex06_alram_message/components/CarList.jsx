@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { SERVER_URL } from './constants';
 import { DataGrid } from '@mui/x-data-grid';
+import { Snackbar } from '@mui/material';
 
 function CarList(){
     // 서버로부터 전체 car목록을 받아와서 저장
     const [cars, setCars] = useState([]);
+    // 알림 메세지 상태
+    const [open, setOpen] = useState(false);
 
     // 시작하면 1번 서버에 요청
     useEffect(() => {
@@ -21,9 +24,19 @@ function CarList(){
 
     // 삭제 후 서버에 다시 목록 요청
     const onDelClick = (url) => {
-        fetch(url, {method: 'DELETE'})
-        .then(response => fetchCars())
-        .catch(err => console.error(err));
+        if(window.confirm('Are you sure to delete?')){
+            fetch(url, {method: 'DELETE'})
+            .then(response => {
+                // console.log(response);
+                if(response.ok){
+                    fetchCars();
+                    setOpen(true);
+                }else{
+                    alert('Something went wrong')
+                }
+            })
+            .catch(err => console.error(err));
+        }
     }
 
     // DataGrid의 헤더에서 사용할 정보
@@ -55,7 +68,13 @@ function CarList(){
                 disableRowSelectionOnClick={true}
                 getRowId={row => row._links.self.href}
             />
-
+            <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: "center"}}
+                open={open}
+                autoHideDuration={2000} // 2초동안 보여지다 감춰진다.
+                onClose={()=> setOpen(false)}
+                message="Car deleted"
+            />
         </div>
     )
 }

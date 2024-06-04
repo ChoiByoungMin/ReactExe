@@ -68,6 +68,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 보안설정/주소 권한 허용 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 어떤 요청이든 Security에 의해 검사하지 않고 모두 허용
+        http.csrf().disable()
+                .cors().and()
+                .authorizeRequests().anyRequest().permitAll();
+        /*
         // csrf보안은 세션을 활용하는데 Rest서버는 세션을 사용하지 않으므로 disable
         http.csrf().disable()
                 // CROS는 설정을 사용한다.
@@ -86,6 +91,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // /login을 제외한 나머지 모든 요청은 필터를 통과해야 정상 응답을 받을 수 있다.
                 .addFilterBefore(authenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
+                        
+         */
     }
     // CORS 자세한 설정 부분
     @Bean
