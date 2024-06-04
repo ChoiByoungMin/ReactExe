@@ -37,7 +37,7 @@ public class LoginController {
         // 클라이언트에 AUTHORIZATION 헤더에 토큰이 전달됨
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bitcamp " + jwts)
-                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authrorization")
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
                 .build();
     }
 }
