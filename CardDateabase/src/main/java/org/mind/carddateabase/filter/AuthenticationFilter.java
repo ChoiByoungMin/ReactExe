@@ -36,7 +36,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                             java.util.Collections.emptyList());
 
             // 시큐리티 인증저장소에 인증 정보 저장
-            SecurityContextHolder.getContext().setAuthentication(authentication);;
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         // 다음 필터 or 서블릿에 전송
