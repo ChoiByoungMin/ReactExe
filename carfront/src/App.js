@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import MainApp from "./ex10_edit_fetch/MainApp";
+import MainApp from "./ex11_renew_mui/MainApp";
 
 function App() {
   return <MainApp />;
