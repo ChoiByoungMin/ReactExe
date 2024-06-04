@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import MainApp from "./ex06_alram_message/MainApp";
+import MainApp from "./ex08_add_fetch/MainApp";
 
 function App() {
   return <MainApp />;
